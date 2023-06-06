@@ -12,12 +12,14 @@ body {
 }
 
 .account_box {
-
-
     display: block;
     width: 75%;
     margin-top: 15% !important;
     margin: auto;
+}
+
+.hide {
+    display: none;
 }
 
 .selection {
