@@ -24,7 +24,7 @@
                     <div style="margin-right: 20px; margin-bottom: 5px;">
                         <p class="title is-6">Ready to contribute?</p>
                     </div>
-                    <a class="button is-success" style="margin-right: 20px;">
+                    <a class="button is-success" href="#" id="registerLink1" style="margin-right: 20px;">
                         <strong>Register</strong>
                     </a>
                 </div>
@@ -40,7 +40,7 @@
 <div class="columns">
     <div class="column is-three-fifths">
 
-        <section class="hero is-large is-success">
+        <section class="hero is-fullheight is-success">
             <div class="hero-body">
                 <div class="">
                     <p class="title is-1">
@@ -56,62 +56,143 @@
     </div>
     <div class="column">
 
-        <form method="POST" class="box account_box">
+        <div id="loginDiv">
 
-            <p class="title is-3" style="text-align: center;">Log In</p>
+            <form method="POST" class="box account_box">
 
-            <div class="field">
-                <label class="label">Email Address</label>
-                <div class="control">
-                    <input class="input" type="email" placeholder="Email Address" id="email_address"
-                        name="email_address" required>
-                </div>
-            </div>
+                <p class="title is-3" style="text-align: center;">Log In</p>
 
-            <div class="field">
-
-                <div class="control">
-                    <label class="label">Password</label>
-                    <input class="input" type="password" placeholder="Password" id="password" name="password" required>
+                <div class="field">
+                    <label class="label">Email Address</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="Email Address" id="email_address"
+                            name="email_address" required>
+                    </div>
                 </div>
 
-            </div>
+                <div class="field">
 
-            <div class="field is-grouped">
-
-                <div class="control">
-                    <label class="checkbox">
-                        <input type="checkbox">
-                        Stay signed in
-                    </label>
-                </div>
-
-                <div class="label">
-
-                    <a href="">Forgot Password?</a>
+                    <div class="control">
+                        <label class="label">Password</label>
+                        <input class="input" type="password" placeholder="Password" id="password" name="password"
+                            required>
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="field is-grouped">
 
-            <div class="field is-grouped">
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Stay signed in
+                        </label>
+                    </div>
 
-                <div class="control">
-                    <button class="button is-success" type="submit">Submit</button>
+                    <div class="label">
+
+                        <a href="">Forgot Password?</a>
+
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="field is-grouped">
+
+                    <div class="control">
+                        <button class="button is-success" type="submit">Submit</button>
+                    </div>
+
+                </div>
 
 
-            <p>Don't have an account yet? <a href="">Sign up!</a></p>
+                <p>Don't have an account yet? <a href="" id="registerLink2">Sign up!</a></p>
 
-        </form>
+            </form>
+
+        </div>
+
+        <div id="registerDiv" style="display: none;">
+
+            <form method="POST" class="box account_box">
+
+                <p class="title is-3" style="text-align: center;">Register</p>
+
+                <div class="field">
+                    <label class="label">First Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="First Name" id="first_name" name="first_name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Last Name</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Last Name" id="last_name" name="last_name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email Address</label>
+                    <div class="control">
+                        <input class="input" type="email" placeholder="Email Address" id="email_address"
+                            name="email_address" required>
+                    </div>
+                </div>
+
+                <div class="field">
+
+                    <div class="control">
+                        <label class="label">Password</label>
+                        <input class="input" type="password" placeholder="Password" id="password" name="password"
+                            required>
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <div class="control">
+                        <label class="label">Repeat Password</label>
+                        <input class="input" type="password" placeholder="Password" id="confirm-password"
+                            name="confirm-password" required>
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            I agree to the <a href="#">terms and conditions</a>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="field is-grouped" style="padding-top: 2%;">
+
+                    <div class="control">
+                        <button class="button is-success" type="submit">Submit</button>
+                    </div>
+
+                </div>
+
+
+                <p>Already have an account? <a href="#" id="loginLink">Log in!</a></p>
+
+            </form>
+
+        </div>
 
 
     </div>
 </div>
 
 
-
+<script src="static/js/landing.js"></script>
 
 {% endblock %}
