@@ -1,0 +1,190 @@
+{% extends 'base2.html' %}
+
+{% block head %}
+
+<title>Episteme | Submission Form</title>
+
+{% endblock %}
+
+{% block body %}
+
+<section class="hero is-link">
+    <div class="hero-body">
+        <p class="title">
+            Submission Form
+        </p>
+        <p class="subtitle">
+            The place where you can submit student theses.
+        </p>
+    </div>
+</section>
+
+<div class="field has-addons" style="margin: 20px;">
+    <p class="control">
+        <span class="select">
+            <select>
+                <option>Thesis</option>
+                <option>Project</option>
+            </select>
+        </span>
+    </p>
+    <p class="control is-expanded">
+        <input class="input" type="text" placeholder="Search keywords (separated by comma)">
+    </p>
+    <p class="control">
+        <a class="button">
+            Search
+        </a>
+    </p>
+</div>
+
+<div class="columns" style="margin-left: 20px; margin-right: 20px;">
+    <!-- Submission Form -->
+    <div class="column is-narrow" style="border: 1px solid black;">
+        <form method="POST" action="/submit">
+            <h1 class="title">Submission Form</h1>
+
+            <div class="field">
+                <label class="label">Thesis Title</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Thesis Title" name="thesis_title">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Submission Type</label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="individual" onclick="handleRadioChange()" checked>
+                    Individual
+                </label>
+                <label class="radio">
+                    <input type="radio" name="answer" value="group" onclick="handleRadioChange()">
+                    Group
+                </label>
+            </div>
+
+            <div class="field" id="individualNameField">
+                <label class="label">Full Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Full Name" name="full_name">
+                </div>
+            </div>
+
+            <div class="field" id="groupNameField" style="display: none;">
+                <label class="label">Group Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Group Name" name="group_name">
+                </div>
+            </div>
+
+            <div class="field" id="memberFields" style="display: none;">
+                <label class="label">Members</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Member #1" name="member_name1">
+                </div>
+                <div class="control" style="margin-top: 5px;">
+                    <input class="input" type="text" placeholder="Member #2" name="member_name2">
+                </div>
+                <div class="control" style="margin-top: 5px;">
+                    <input class="input" type="text" placeholder="Member #3" name="member_name3">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Professor Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Professor Name" name="professor_name">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Submission Date</label>
+                <div class="control">
+                    <input class="input" type="date" placeholder="Submission Date" name="submission_date">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Abstract/Description</label>
+                <div class="control">
+                    <textarea class="textarea has-fixed-size" placeholder="Abstract/Description"
+                        name="abstract"></textarea>
+                </div>
+            </div>
+
+            <label class="label">Soft Copy</label>
+
+            <div id="file-js-example" class="file has-name">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose a file…
+                        </span>
+                    </span>
+                    <span class="file-name">
+                        No file uploaded
+                    </span>
+                </label>
+            </div>
+
+            <div class="field" style="margin-top: 12px;">
+                <label class="label">Github Repository Link</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Github Repository Link" name="github_repository">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Keywords</label>
+                <div class="control">
+                    <input id="keywords-input" class="input" type="text" placeholder="Enter Keywords">
+                </div>
+            </div>
+            <div id="tag-container" class="tags"></div>
+
+            <div class="field">
+                <label class="label">School</label>
+                <div class="control">
+                    <div class="select">
+                        <select name="school">
+                            <option disabled selected>Select School</option>
+                            <option value="Senior High School">Senior High School</option>
+                            <option value="School of Architecture">School of Architecture</option>
+                            <option value="School of Computing and Information Technologies">School of Computing and
+                                Information Technologies</option>
+                            <option value="School of Engineering">School of Engineering</option>
+                            <option value="School of Management">School of Management</option>
+                            <option value="School of Multimedia Arts">School of Multimedia Arts</option>
+                            <option value="Graduate School">Graduate School</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light" id="clearFormButton">Clear Form</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="column">
+        <h1 class="title">Submission Status</h1>
+    </div>
+
+</div>
+
+<script src="static/js/submission.js"></script>
+
+{% endblock %}
