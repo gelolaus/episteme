@@ -11,8 +11,7 @@
 <!-- Navbar -->
 <nav class="navbar is-light is-transparent" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="https://github.com/bigbrews/knowledge-management-system"
-            style="margin-left: 20px;">
+        <a class="navbar-item" href="{{ url_for('homepage') }}" style="margin-left: 20px;">
             <img src="static/img/navbar/Episteme-logo.png"
                 alt="Episteme: A Knowledge Management System For Sorting Theses Knowledge" width="112" height="40">
         </a>
@@ -42,10 +41,10 @@
 <div class="columns">
     <div class="column is-three-fifths">
 
-        <section class="hero is-fullheight is-success">
+        <section class="hero is-fullheight is-link">
             <div class="hero-body">
                 <div class="">
-                    <p class="title is-1">
+                    <p class="title is-1" style="font-size: 60px;">
                         Welcome to Episteme!
                     </p>
                     <p class="subtitle">
