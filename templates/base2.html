@@ -16,8 +16,7 @@
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="https://github.com/bigbrews/knowledge-management-system"
-                style="margin-left: 20px;">
+            <a class="navbar-item" href="{{ url_for('homepage') }}" style="margin-left: 20px;">
                 <img src="static/img/navbar/Episteme-logo.png"
                     alt="Episteme: A Knowledge Management System For Sorting Theses Knowledge" width="112" height="28">
             </a>
@@ -34,11 +33,11 @@
 
             <div class="navbar-start">
 
-                <a class="navbar-item" href="">
+                <a class="navbar-item" href="{{ url_for('homepage') }}">
                     Knowledge Library
                 </a>
 
-                <a class="navbar-item" href="">
+                <a class="navbar-item" href="{{ url_for('submission') }}">
                     Submission Form
                 </a>
 
@@ -57,13 +56,18 @@
 
     </nav>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     {% block body %}
 
+
+
+
     {% endblock %}
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="static/js/navbar.js"></script>
+
+
 </body>
 
 </html>
