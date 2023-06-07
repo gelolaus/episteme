@@ -1,0 +1,23 @@
+.selection {
+
+    display: block;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+/* testing names -luis */
+.card-content {
+
+    height: 700px;
+
+}
+
+.level-item {
+
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
