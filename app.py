@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 from register import register_user
 from login import login_user
 
@@ -29,9 +29,11 @@ def register_route():
 
     # Process the result and return a response
     if result:
-        return 'Registration successful'
+        response = {'message': 'Registration successful'}
     else:
-        return 'Registration failed'
+        response = {'message': 'Registration failed'}
+
+    return jsonify(response)
 
 
 @app.route('/login', methods=['POST'])
@@ -44,9 +46,14 @@ def login_route():
 
     if result:
         session['email_address'] = email_address
-        return ('It worked!')  # redirect('/selection')
+        return redirect('/homepage')
     else:
         return 'Invalid email/password combination'
+
+
+@app.route('/homepage')
+def homepage():
+    return render_template('homepage.html')
 
 
 if __name__ == '__main__':
