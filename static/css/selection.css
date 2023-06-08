@@ -16,8 +16,17 @@
     z-index: 9999;
 }
 
+.card-container .card {
+    width: 400px;
+    height: 600px;
+    margin: auto;
+    transition: transform 0.3s ease-in-out;
+}
 
-/* testing names -luis */
+.card-container .card:hover {
+    transform: scale(1.05);
+}
+
 .card-content {
 
     height: 700px;
