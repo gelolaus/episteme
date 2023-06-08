@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, redirect, session, jsonify
+from flask import Flask, render_template, request, redirect, session, jsonify, render_template_string
 from register import register_user
 from login import login_user
+from admin import fetch_submissions
+from update_status import update_submission_status
 import submit
+
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = 'BigBrewsIsAwesome'
@@ -9,16 +12,10 @@ app.secret_key = 'BigBrewsIsAwesome'
 
 @app.route('/')
 def index():
-    return ('Hello, world!')
+    return 'Hello, world!'
 
 
-'''
-This is for the LANDING, REGISTER, and LOGIN page
-This is for the LANDING, REGISTER, and LOGIN page
-This is for the LANDING, REGISTER, and LOGIN page
-'''
-
-
+# LANDING, REGISTER, and LOGIN pages
 @app.route('/landing')
 def landing():
     return render_template('landing.html')
@@ -37,11 +34,9 @@ def register_route():
 
     # Process the result and return a response
     if result:
-        response = {'message': 'Registration successful'}
+        return redirect('/landing')
     else:
-        response = {'message': 'Registration failed'}
-
-    return jsonify(response)
+        return 'Error registering user'
 
 
 @app.route('/login', methods=['POST'])
@@ -59,13 +54,7 @@ def login_route():
         return 'Invalid email/password combination'
 
 
-'''
-This is for the HOMEPAGE and SUBMISSION page
-This is for the HOMEPAGE and SUBMISSION page
-This is for the HOMEPAGE and SUBMISSION page
-'''
-
-
+# HOMEPAGE and SUBMISSION pages
 @app.route('/homepage')
 def homepage():
     return render_template('homepage.html')
@@ -106,16 +95,23 @@ def submit_form():
     return "Form submitted successfully!"
 
 
-'''
-This is for the ADMIN and VERIFIER page
-This is for the ADMIN and VERIFIER page
-This is for the ADMIN and VERIFIER page
-'''
-
-
+# ADMIN and VERIFIER pages
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    submissions = fetch_submissions()
+    return render_template('admin.html', submissions=submissions)
+
+
+@app.route('/update_status', methods=['POST'])
+def update_status():
+    # Get the submission ID and new status from the request JSON data
+    submission_id = request.json['submissionId']
+    new_status = request.json['status']
+
+    # Update the status in the database
+    update_submission_status(submission_id, new_status)
+
+    return jsonify({'message': 'Status updated successfully'})
 
 
 if __name__ == '__main__':
