@@ -1,0 +1,125 @@
+{% extends 'base2.html' %}
+
+{% block head %}
+<title>Episteme | Admin Panel</title>
+{% endblock %}
+
+{% block body %}
+<div id="homepage-div"> <!-- Homepage Div -->
+    <section class="hero is-link">
+        <div class="hero-body">
+            <p class="title">
+                Admin Panel
+            </p>
+            <p class="subtitle">
+                Approve or reject submissions
+            </p>
+        </div>
+    </section>
+
+    <div class="field has-addons" style="margin: 20px;">
+        <p class="control">
+            <span class="select">
+                <select>
+                    <option>Thesis</option>
+                    <option>Project</option>
+                </select>
+            </span>
+        </p>
+        <p class="control is-expanded">
+            <input class="input" type="text" placeholder="Search keywords (separated by comma)">
+        </p>
+        <p class="control">
+            <a class="button">
+                Search
+            </a>
+        </p>
+    </div>
+
+    <div class="columns" style="margin-left: 20px; margin-right: 20px">
+        <!-- Submission Form -->
+        <div class="column is-narrow" style="border: 1px solid black;">
+            <form>
+                <h1 class="title">Search Filter</h1>
+                <!-- Filter checkboxes here -->
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">Update Filters</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light">Reset Filters</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="column" style="overflow-y: scroll;">
+            <h1 class="title">Admin Panel</h1>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Submission ID</th>
+                            <th>Thesis Title</th>
+                            <th>Submission Type</th>
+                            <th>Full Name</th>
+                            <th>Group Name</th>
+                            <th>Member Name 1</th>
+                            <th>Member Name 2</th>
+                            <th>Member Name 3</th>
+                            <th>Professor Name</th>
+                            <th>Submission Date</th>
+                            <th>Abstract</th>
+                            <th>Soft Copy</th>
+                            <th>Github Repository</th>
+                            <th>Keywords</th>
+                            <th>School</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submission-table-body">
+                        {% for submission in submissions %}
+                        <tr>
+                            <td>{{ submission[0] }}</td>
+                            <td>{{ submission[1] }}</td>
+                            <td>{{ submission[2] }}</td>
+                            <td>{{ submission[3] }}</td>
+                            <td>{{ submission[4] }}</td>
+                            <td>{{ submission[5] }}</td>
+                            <td>{{ submission[6] }}</td>
+                            <td>{{ submission[7] }}</td>
+                            <td>{{ submission[8] }}</td>
+                            <td>{{ submission[9] }}</td>
+                            <td>{{ submission[10] }}</td>
+                            <td>{{ submission[11] }}</td>
+                            <td>{{ submission[12] }}</td>
+                            <td>{{ submission[13] }}</td>
+                            <td>{{ submission[14] }}</td>
+                            <td>
+                                <div class="select">
+                                    <select>
+                                        <option {% if submission[15]=='Submitted' %}selected{% endif %}>Submitted
+                                        </option>
+                                        <option {% if submission[15]=='Verified' %}selected{% endif %}>Verified</option>
+                                        <option {% if submission[15]=='Published' %}selected{% endif %}>Published
+                                        </option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="button is-primary"
+                                    onclick="updateStatus('{{ submission[0] }}', this)">Update Status</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="static/js/admin.js"></script>
+{% endblock %}
