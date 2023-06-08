@@ -12,64 +12,50 @@
 <div id="selection-div" class="overlay"> <!-- Selection Div -->
     <section class="hero is-fullheight">
         <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="columns is-centered is-vcentered selection-columns">
-                    <div class="column is-three-quarters">
-                        <div class="buttons is-centered">
-                            <div class="card" style="width: 400px; height: 600px; margin: auto;">
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                        <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-                                            alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="card-content has-text-centered">
-                                        <div class="content">
-                                            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
-                                        </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-item">
-                                            <a href="">
-                                                <div class="selection">
-                                                    <button class="button is-link is-fullwidth is-large"
-                                                        style="width: 300px;">
-                                                        Submit a Project/Thesis
-                                                    </button>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
-                            <div class="card" style="width: 400px; height: 600px; margin: auto;">
-                                <div class="card-image">
-                                    <figure class="image is-4by3">
-                                        <img src="https://images.unsplash.com/photo-1524578271613-d550eacf6090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                                            alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="card-content has-text-centered">
-                                        <div class="content">
-                                            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
-                                        </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-item">
-                                            <a href="" id="continue-btn">
-                                                <div class="selection">
-                                                    <button class="button is-link is-fullwidth is-large"
-                                                        style="width: 300px;">
-                                                        Continue to Homepage
-                                                    </button>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </nav>
-                                </div>
-                            </div>
+          <div class="container has-text-centered">
+            <div class="columns is-centered is-vcentered selection-columns">
+              <div class="column is-three-quarters">
+                <div class="buttons is-centered">
+                  <div class="card-container" style="margin-right: 35px;">
+                    <a href="{{ url_for('submission') }}"> 
+                      <div class="card">
+                        <!-- Card 1 -->
+                        <div class="card-image">
+                          <figure class="image is-4by3">
+                            <img src="https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Placeholder image">
+                          </figure>
                         </div>
-                    </div>
+                        <div class="card-content has-text-centered">
+                          <div class="content" style="font-size: 18px;">
+                            <p><strong>Contribute to the academic community & showcase your research here!</strong></p>
+                            <p>Here, you have the opportunity to share your scholarly work with fellow students, researchers, and the esteemed faculty and professors at Asia Pacific College. Join in building a dynamic repository of knowledge and contributing to intellectual growth!</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="card-container">
+                    <a href="" id="continue-btn"> 
+                      <div class="card">
+                        <!-- Card 2 -->
+                        <div class="card-image">
+                          <figure class="image is-4by3">
+                            <img src="https://images.unsplash.com/photo-1524578271613-d550eacf6090?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Placeholder image">
+                          </figure>
+                        </div>
+                        <div class="card-content has-text-centered">
+                          <div class="content" style="font-size: 18px;">
+                            <p><strong>Gain access to an extensive collection of academic theses here!</strong></p> 
+                            <p>Explore research and scholarly work conducted by students and faculty of Asia Pacific College. Expand your understanding with innovative ideas, significant discoveries, and insightful findings. Immerse yourself in a repository of knowledge for exploration and reference.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
     </section>
 </div>
