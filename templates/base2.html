@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="{{ url_for('homepage') }}" style="margin-left: 20px;">
+            <a class="navbar-item" href="{{ url_for('index') }}" style="margin-left: 20px;">
                 <img src="static/img/navbar/Episteme-logo.png"
                     alt="Episteme: A Knowledge Management System For Sorting Theses Knowledge" width="112" height="28">
             </a>
@@ -41,14 +41,20 @@
                     Submission Form
                 </a>
 
+                <a class="navbar-item" href="{{ url_for('admin') }}">
+                    Admin Panel
+                </a>
+
             </div>
 
             <div class="navbar-end">
 
-                <figure class="image is-48x48 has-dropdown is-hoverable"
-                    style="padding: 5px; padding-right: 5px; margin-right: 20px;">
-                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                </figure>
+                <a href="/logout">
+                    <figure class="image is-48x48 has-dropdown is-hoverable"
+                        style="padding: 5px; padding-right: 5px; margin-right: 20px;">
+                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                    </figure>
+                </a>
 
             </div>
 
