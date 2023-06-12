@@ -53,9 +53,31 @@ function addTag() {
     }
 }
 
+// Function to handle form submission
+function submitForm(event) {
+    event.preventDefault();
+
+    // Get the form element
+    const form = document.querySelector('form');
+
+    // Create a new FormData object
+    const formData = new FormData(form);
+
+    // Get the keywords tags from the tag container
+    const tags = Array.from(tagContainer.querySelectorAll('.tag')).map(tag => tag.textContent);
+
+    // Append the tags as an array to the formData object
+    formData.append('keywords', JSON.stringify(tags));
+
+    // Make an AJAX request to submit the form data to the server
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/submit');
+    xhr.send(formData);
+}
+
 
 // Add an event listener for the Enter key press on the keywords input
-keywordsInput.addEventListener('keypress', function (event) {
+keywordsInput.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         addTag();
@@ -91,35 +113,11 @@ document.addEventListener('DOMContentLoaded', function () {
         form.reset();
 
         // Clear the keywords
-        const tagContainer = document.getElementById('tag-container');
         tagContainer.innerHTML = '';
 
-        // Reset radio buttons to "Individual" checked
+        // Reset radio buttons to "Individual"
         const individualRadio = document.querySelector('input[value="individual"]');
         individualRadio.checked = true;
-
-        // Handle radio change to show/hide fields accordingly
         handleRadioChange();
     });
 });
-
-function submitForm(event) {
-    event.preventDefault();
-
-    // Get the form element
-    const form = document.querySelector('form');
-
-    // Create a new FormData object
-    const formData = new FormData(form);
-
-    // Get the keywords tags from the tag container
-    const tags = Array.from(tagContainer.querySelectorAll('.tag')).map(tag => tag.textContent);
-
-    // Add the tags to the formData object
-    formData.append('keywords', tags.join(', '));
-
-    // Make an AJAX request to submit the form data to the server
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/submit');
-    xhr.send(formData);
-}
