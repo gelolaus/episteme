@@ -60,19 +60,12 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Submission ID</th>
                             <th>Thesis Title</th>
                             <th>Submission Type</th>
                             <th>Full Name</th>
                             <th>Group Name</th>
-                            <th>Member Name 1</th>
-                            <th>Member Name 2</th>
-                            <th>Member Name 3</th>
                             <th>Professor Name</th>
                             <th>Submission Date</th>
-                            <th>Abstract</th>
-                            <th>Soft Copy</th>
-                            <th>Github Repository</th>
                             <th>Keywords</th>
                             <th>School</th>
                             <th>Status</th>
@@ -82,35 +75,19 @@
                     <tbody id="submission-table-body">
                         {% for submission in submissions %}
                         <tr>
-                            <td>{{ submission[0] }}</td>
                             <td>{{ submission[1] }}</td>
                             <td>{{ submission[2] }}</td>
                             <td>{{ submission[3] }}</td>
                             <td>{{ submission[4] }}</td>
-                            <td>{{ submission[5] }}</td>
-                            <td>{{ submission[6] }}</td>
-                            <td>{{ submission[7] }}</td>
                             <td>{{ submission[8] }}</td>
                             <td>{{ submission[9] }}</td>
-                            <td>{{ submission[10] }}</td>
-                            <td>{{ submission[11] }}</td>
-                            <td>{{ submission[12] }}</td>
                             <td>{{ submission[13] }}</td>
                             <td>{{ submission[14] }}</td>
+                            <td>{{ submission[15] }}</td>
                             <td>
-                                <div class="select">
-                                    <select>
-                                        <option {% if submission[15]=='Submitted' %}selected{% endif %}>Submitted
-                                        </option>
-                                        <option {% if submission[15]=='Verified' %}selected{% endif %}>Verified</option>
-                                        <option {% if submission[15]=='Published' %}selected{% endif %}>Published
-                                        </option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="button is-primary"
-                                    onclick="updateStatus('{{ submission[0] }}', this)">Update Status</button>
+                                <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
+                                    data-submission-id="{{submission[0]}}">View
+                                    Details</button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -120,6 +97,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script src="static/js/admin.js"></script>
 {% endblock %}
