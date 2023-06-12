@@ -11,7 +11,7 @@
 <!-- Navbar -->
 <nav class="navbar is-light is-transparent" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a class="navbar-item" href="{{ url_for('homepage') }}" style="margin-left: 20px;">
+        <a class="navbar-item" href="{{ url_for('index') }}" style="margin-left: 20px;">
             <img src="static/img/navbar/Episteme-logo.png"
                 alt="Episteme: A Knowledge Management System For Sorting Theses Knowledge" width="112" height="40">
         </a>
@@ -38,7 +38,7 @@
 </nav>
 
 <!-- Landing Page column -->
-<div class="columns">
+<div class="columns" style="margin-bottom: -10px;">
     <div class="column is-three-fifths">
 
         <section class="hero is-fullheight is-link">
@@ -84,25 +84,14 @@
                 <div class="field is-grouped">
 
                     <div class="control">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            Stay signed in
-                        </label>
-                    </div>
-
-                    <div class="label">
-
-                        <a href="">Forgot Password?</a>
-
-                    </div>
-
-                </div>
-
-                <div class="field is-grouped">
-
-                    <div class="control">
                         <button class="button is-success" type="submit">Submit</button>
                     </div>
+
+                    {% if error_message %}
+                    <div id="error-message" class="field box">
+                        <p class="help is-danger" style="font-size: 15px;">{{ error_message }}</p>
+                    </div>
+                    {% endif %}
 
                 </div>
 
@@ -159,17 +148,6 @@
                         <label class="label">Repeat Password</label>
                         <input class="input" type="password" placeholder="Password" id="confirm-password"
                             name="confirm-password" required>
-                    </div>
-
-                </div>
-
-                <div class="field">
-
-                    <div class="control">
-                        <label class="checkbox">
-                            <input type="checkbox">
-                            I agree to the <a href="#">terms and conditions</a>
-                        </label>
                     </div>
 
                 </div>
