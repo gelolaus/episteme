@@ -1,7 +1,7 @@
 import mysql.connector
 
 
-def submit_to_database(form_data):
+def submit_to_database(form_data, user_id):
     db = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -22,7 +22,10 @@ def submit_to_database(form_data):
     if 'keywords' in form_data:
         query += ", keywords"
 
-    query += ") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
+    # Add the user_id column to the query
+    query += ", user_id)"
+
+    query += " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
 
     # Optional field placeholders
     if 'github_repository' in form_data:
@@ -31,7 +34,8 @@ def submit_to_database(form_data):
     if 'keywords' in form_data:
         query += ", %s"
 
-    query += ")"
+    # Add the placeholder for user_id
+    query += ", %s)"
 
     values = (
         form_data['thesis_title'],
@@ -52,13 +56,12 @@ def submit_to_database(form_data):
         values += (form_data['github_repository'],)
 
     if 'keywords' in form_data:
-        # Get the keywords as a list
-        keywords = form_data['keywords']
-
-        # Convert the keywords into a format suitable for database storage
+        keywords = form_data['keywords'].split(", ")
         keywords_str = ', '.join(keywords)
-
         values += (keywords_str,)
+
+    # Add the user_id to the values tuple
+    values += (user_id,)
 
     cursor.execute(query, values)
     db.commit()
