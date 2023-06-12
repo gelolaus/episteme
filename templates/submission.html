@@ -181,6 +181,44 @@
 
     <div class="column">
         <h1 class="title">Submission Status</h1>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Thesis Title</th>
+                        <th>Submission Type</th>
+                        <th>Full Name</th>
+                        <th>Group Name</th>
+                        <th>Professor Name</th>
+                        <th>Submission Date</th>
+                        <th>Keywords</th>
+                        <th>School</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="submission-table-body">
+                    {% for submission in submissions %}
+                    <tr>
+                        <td>{{ submission['thesis_title'] }}</td>
+                        <td>{{ submission['submission_type'] }}</td>
+                        <td>{{ submission['full_name'] }}</td>
+                        <td>{{ submission['group_name'] }}</td>
+                        <td>{{ submission['professor_name'] }}</td>
+                        <td>{{ submission['submission_date'] }}</td>
+                        <td>{{ submission['keywords'] }}</td>
+                        <td>{{ submission['school'] }}</td>
+                        <td>{{ submission['status'] }}</td>
+                        <td>
+                            <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
+                                data-submission-id="{{ submission['id'] }}">View Details</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
 </div>
