@@ -27,3 +27,12 @@ registerLink2.addEventListener('click', function (event) {
     event.preventDefault(); // Prevents following the "#" link
     toggleDivVisibility(registerDiv, loginDiv);
 });
+
+setTimeout(function () {
+    var errorMessage = document.getElementById('error-message');
+    errorMessage.style.opacity = 0;
+    errorMessage.style.transition = 'opacity 1s';
+    setTimeout(function () {
+        errorMessage.style.display = 'none';
+    }, 1000);
+}, 3000);
