@@ -41,7 +41,7 @@
 <div class="columns" style="margin-left: 20px; margin-right: 20px;">
     <!-- Submission Form -->
     <div class="column is-narrow" style="border: 1px solid black;">
-        <form method="POST" action="/submit">
+        <form method="POST" action="/submit" enctype="multipart/form-data">
             <h1 class="title">Submission Form</h1>
 
             <div class="field">
@@ -116,7 +116,7 @@
 
             <div id="file-js-example" class="file has-name">
                 <label class="file-label">
-                    <input class="file-input" type="file" name="">
+                    <input class="file-input" type="file" accept=".pdf" name="file">
                     <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>
@@ -141,7 +141,7 @@
             <div class="field">
                 <label class="label">Keywords</label>
                 <div class="control">
-                    <input id="keywords-input" class="input" type="text" placeholder="Enter Keywords">
+                    <input id="keywords-input" class="input" type="text" placeholder="Enter Keywords" disabled>
                 </div>
             </div>
             <div id="tag-container" class="tags"></div>
@@ -210,8 +210,10 @@
                         <td>{{ submission['school'] }}</td>
                         <td>{{ submission['status'] }}</td>
                         <td>
-                            <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
-                                data-submission-id="{{ submission['id'] }}">View Details</button>
+                            <form action="/view_details" method="POST">
+                                <input type="hidden" name="submission_id" value="{{ submission['submission_id'] }}">
+                                <button class="button is-primary" type="submit">View Details</button>
+                            </form>
                         </td>
                     </tr>
                     {% endfor %}
