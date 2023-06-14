@@ -1,12 +1,26 @@
+from flask import render_template, request
+import os
+import submit
+
 from flask import Flask, render_template, request, redirect, session, jsonify
+from werkzeug.utils import secure_filename
 from register import register_user
 from login import login_user
 from admin import fetch_submissions
 from personal import get_user_submissions, get_user_id
-import submit
+
+UPLOAD_FOLDER = 'uploads'  # Folder to store uploaded files
+ALLOWED_EXTENSIONS = {'pdf'}  # Allowed file extensions
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = 'BigBrewsIsAwesome'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 # Define a list of routes that require authentication
 authenticated_routes = ['/homepage', '/submission', '/admin', '/update_status']
@@ -59,19 +73,23 @@ def register_route():
 
     # Perform domain validation
     allowed_domains = ["apc.edu.ph",
-                       "student.apc.edu.ph", "bigbrews", "tester"]
+                       "student.apc.edu.ph"]
     domain = email_address.split("@")[-1]
     if domain not in allowed_domains:
-        return "Invalid email domain. Please use an email address from the allowed domains."
+        registration_message = 'This form only accepts \"apc.edu.ph\" and \"student.apc.edu.ph\" email addresses.'
+        return render_template('landing.html', registration_message=registration_message)
 
     # Call the register_user function from register.py
     result = register_user(first_name, last_name, email_address, password)
 
     # Process the result and return a response
     if result:
-        return redirect('/landing')
+
+        success_message = 'Registered successfully!'
+        return render_template('landing.html', success_message=success_message)
     else:
-        return 'Error registering user'
+        errorreg_message = 'Error registering user'
+        return render_template('landing.html', errorreg_message=errorreg_message)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -172,10 +190,31 @@ def submit_form():
         # User ID not found, redirect to landing
         return redirect('/landing')
 
-    # Call submit function to handle MySQL database operations
-    submit.submit_to_database(form_data, user_id)
+    # Save the uploaded PDF file
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
 
-    return "Form submitted successfully!"
+        # Append the file to the form_data dictionary
+        form_data['file'] = file
+
+        # Call submit function to handle MySQL database operations
+        submit.submit_to_database(form_data, user_id)
+
+        return redirect('/submission')
+
+    return "Error submitting form. Please check your file."
+
+
+@app.route('/view_submission', methods=['POST'])
+def view_submission():
+    submission_id = request.form['submission_id']
+    # Fetch the submission details from the MySQL table based on submission_id
+
+    # Pass the details to the view_submission.html template
+    return render_template('view_submission.html', submission=submission_details)
 
 
 # ADMIN and VERIFIER pages
@@ -183,6 +222,12 @@ def submit_form():
 def admin():
     submissions = fetch_submissions()
     return render_template('admin.html', submissions=submissions)
+
+
+@app.route('/verify')
+def verify():
+    submissions = fetch_submissions()
+    return render_template('verify.html', submissions=submissions)
 
 
 if __name__ == '__main__':
