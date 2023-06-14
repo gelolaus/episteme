@@ -36,3 +36,17 @@ setTimeout(function () {
         errorMessage.style.display = 'none';
     }, 1000);
 }, 3000);
+
+function validatePasswords() {
+    var password = document.getElementById("register-password").value;
+    var confirmPassword = document.getElementById("confirm-password").value;
+    var submitBtn = document.getElementById("submitBtn");
+
+    if (password !== confirmPassword) {
+        submitBtn.disabled = true;
+        return false;
+    }
+
+    submitBtn.disabled = false;
+    return true;
+}
