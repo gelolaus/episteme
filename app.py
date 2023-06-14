@@ -6,7 +6,9 @@ from flask import Flask, render_template, request, redirect, session, jsonify
 from werkzeug.utils import secure_filename
 from register import register_user
 from login import login_user
-from admin import fetch_submissions
+from admin import fetch_submissions_admin
+from verify import fetch_submissions_verify
+from publish import fetch_submissions_publish
 from personal import get_user_submissions, get_user_id
 
 UPLOAD_FOLDER = 'uploads'  # Folder to store uploaded files
@@ -23,7 +25,8 @@ def allowed_file(filename):
 
 
 # Define a list of routes that require authentication
-authenticated_routes = ['/homepage', '/submission', '/admin', '/update_status']
+authenticated_routes = ['/homepage', '/submission',
+                        '/admin', '/update_status', '/verify', '/publish']
 
 
 @app.before_request
@@ -37,6 +40,22 @@ def check_authentication():
     if request.path == '/admin' and 'email_address' in session:
         allowed_email_addresses = [
             'dev@bigbrews'  # Modify this with the actual allowed email addresses
+        ]
+        if session['email_address'] not in allowed_email_addresses:
+            return redirect('/')
+
+    # Check if the user is trying to access the /verify page
+    if request.path == '/verify' and 'email_address' in session:
+        allowed_email_addresses = [
+            'bigbrews@apc.edu.ph'  # Modify this with the actual allowed email addresses
+        ]
+        if session['email_address'] not in allowed_email_addresses:
+            return redirect('/')
+
+            # Check if the user is trying to access the /publish page
+    if request.path == '/publish' and 'email_address' in session:
+        allowed_email_addresses = [
+            'bigbrews@apc.edu.ph'  # Modify this with the actual allowed email addresses
         ]
         if session['email_address'] not in allowed_email_addresses:
             return redirect('/')
@@ -218,16 +237,24 @@ def view_submission():
 
 
 # ADMIN and VERIFIER pages
-@app.route('/admin')
-def admin():
-    submissions = fetch_submissions()
-    return render_template('admin.html', submissions=submissions)
 
 
 @app.route('/verify')
 def verify():
-    submissions = fetch_submissions()
+    submissions = fetch_submissions_verify()
     return render_template('verify.html', submissions=submissions)
+
+
+@app.route('/publish')
+def publish():
+    submissions = fetch_submissions_publish()
+    return render_template('publish.html', submissions=submissions)
+
+
+@app.route('/admin')
+def admin():
+    submissions = fetch_submissions_admin()
+    return render_template('admin.html', submissions=submissions)
 
 
 if __name__ == '__main__':
