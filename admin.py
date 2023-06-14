@@ -14,14 +14,14 @@ def connect_to_database():
     return connection
 
 
-def fetch_submissions():
+def fetch_submissions_admin():
     # Connect to the database
     connection = connect_to_database()
 
     # Create a cursor to execute SQL queries
     cursor = connection.cursor()
 
-    # Fetch the data from the submissions table
+    # Fetch the data from the submissions table with "Verified" status
     cursor.execute('SELECT * FROM submissions')
     submissions = cursor.fetchall()
 
@@ -31,12 +31,13 @@ def fetch_submissions():
 
     return submissions
 
+
 # You can define other functions for CRUD operations here
 # For example: insert_submission(), update_status(), delete_submission()
 
 
 if __name__ == '__main__':
     # Example usage of the fetch_submissions() function
-    submissions = fetch_submissions()
+    submissions = fetch_submissions_admin()
     for submission in submissions:
         print(submission)
