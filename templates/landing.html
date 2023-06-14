@@ -63,6 +63,12 @@
 
                 <p class="title is-3" style="text-align: center;">Log In</p>
 
+                {% if success_message %}
+                <div id="error-message" class="field">
+                    <p class="help is-danger" style="font-size: 15px; color: lightgreen;">{{ success_message }}</p>
+                </div>
+                {% endif %}
+
                 <div class="field">
                     <label class="label">Email Address</label>
                     <div class="control">
@@ -88,7 +94,7 @@
                     </div>
 
                     {% if error_message %}
-                    <div id="error-message" class="field box">
+                    <div id="error-message" class="field">
                         <p class="help is-danger" style="font-size: 15px;">{{ error_message }}</p>
                     </div>
                     {% endif %}
@@ -107,6 +113,12 @@
             <form method="POST" action="/register" class="box account_box">
 
                 <p class="title is-3" style="text-align: center;">Register</p>
+
+                {% if errorreg_message %}
+                <div id="error-message" class="field">
+                    <p class="help is-danger" style="font-size: 15px;">{{ errorreg_message }}</p>
+                </div>
+                {% endif %}
 
                 <div class="field">
                     <label class="label">First Name</label>
@@ -132,12 +144,18 @@
                     </div>
                 </div>
 
+                {% if registration_message %}
+                <div id="error-message" class="field">
+                    <p class="help is-danger" style="font-size: 15px;">{{ registration_message }}</p>
+                </div>
+                {% endif %}
+
                 <div class="field">
 
                     <div class="control">
                         <label class="label">Password</label>
-                        <input class="input" type="password" placeholder="Password" id="password" name="password"
-                            required>
+                        <input class="input" type="password" placeholder="Password" id="register-password"
+                            name="password" required>
                     </div>
 
                 </div>
@@ -147,7 +165,7 @@
                     <div class="control">
                         <label class="label">Repeat Password</label>
                         <input class="input" type="password" placeholder="Password" id="confirm-password"
-                            name="confirm-password" required>
+                            name="confirm-password" disabled>
                     </div>
 
                 </div>
@@ -155,7 +173,7 @@
                 <div class="field is-grouped" style="padding-top: 2%;">
 
                     <div class="control">
-                        <button class="button is-success" type="submit">Submit</button>
+                        <button class="button is-success" type="submit" id="submitBtn">Submit</button>
                     </div>
 
                 </div>
