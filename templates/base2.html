@@ -41,17 +41,24 @@
                     Submission Form
                 </a>
 
+                {% if session['email_address'] == 'dev@bigbrews' %}
                 <a class="navbar-item" href="{{ url_for('admin') }}">
                     Admin Panel
                 </a>
+                {%endif%}
 
+
+                {% if session['email_address'] == 'bigbrews@apc.edu.ph' %}
                 <a class="navbar-item" href="{{ url_for('verify') }}">
                     Verify Panel
                 </a>
+                {%endif%}
 
+                {% if session['email_address'] == 'bigbrews@apc.edu.ph' %}
                 <a class="navbar-item" href="{{ url_for('publish') }}">
                     Publish Panel
                 </a>
+                {%endif%}
 
             </div>
 
