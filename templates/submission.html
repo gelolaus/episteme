@@ -201,14 +201,14 @@
                     {% for submission in submissions %}
                     <tr>
                         <td>{{ submission['thesis_title'] }}</td>
-                        <td>{{ submission['submission_type'] }}</td>
+                        <td>{{ submission['submission_type'] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                         <td>{{ submission['full_name'] }}</td>
                         <td>{{ submission['group_name'] }}</td>
                         <td>{{ submission['professor_name'] }}</td>
                         <td>{{ submission['submission_date'] }}</td>
                         <td>{{ submission['keywords'] }}</td>
                         <td>{{ submission['school'] }}</td>
-                        <td>{{ submission['status'] }}</td>
+                        <td>{{ submission['status'] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                         <td>
                             <form action="/view_details" method="POST">
                                 <input type="hidden" name="submission_id" value="{{ submission['submission_id'] }}">
