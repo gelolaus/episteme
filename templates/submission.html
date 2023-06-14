@@ -201,7 +201,8 @@
                     {% for submission in submissions %}
                     <tr>
                         <td>{{ submission['thesis_title'] }}</td>
-                        <td>{{ submission['submission_type'] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
+                        <td>{{ submission['submission_type'] | replace("{", "") | replace("}", "") | replace("'", "") }}
+                        </td>
                         <td>{{ submission['full_name'] }}</td>
                         <td>{{ submission['group_name'] }}</td>
                         <td>{{ submission['professor_name'] }}</td>
@@ -210,7 +211,7 @@
                         <td>{{ submission['school'] }}</td>
                         <td>{{ submission['status'] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                         <td>
-                            <form action="/view_details" method="POST">
+                            <form action="/view_submission" method="POST">
                                 <input type="hidden" name="submission_id" value="{{ submission['submission_id'] }}">
                                 <button class="button is-primary" type="submit">View Details</button>
                             </form>
