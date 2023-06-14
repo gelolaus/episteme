@@ -69,11 +69,35 @@ function submitForm(event) {
     // Append the tags as an array to the formData object
     formData.append('keywords', JSON.stringify(tags));
 
+    // Get the file input element
+    const fileInput = document.querySelector('#file-js-example input[type=file]');
+
+    // Check if a file is selected
+    if (fileInput.files.length > 0) {
+        // Append the file to the formData object
+        formData.append('file', fileInput.files[0]);
+    }
+
     // Make an AJAX request to submit the form data to the server
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/submit');
+
+    // Set the appropriate headers
+    xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Handle the response from the server
+            console.log(xhr.responseText);
+        } else {
+            // Handle the error
+            console.error('Error:', xhr.statusText);
+        }
+    };
+
     xhr.send(formData);
 }
+
 
 
 // Add an event listener for the Enter key press on the keywords input
