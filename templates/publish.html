@@ -1,0 +1,104 @@
+{% extends 'base2.html' %}
+
+{% block head %}
+<title>Episteme | Admin Panel</title>
+{% endblock %}
+
+{% block body %}
+<div id="homepage-div"> <!-- Homepage Div -->
+    <section class="hero is-link">
+        <div class="hero-body">
+            <p class="title">
+                Publish Panel
+            </p>
+            <p class="subtitle">
+                Publish submissions
+            </p>
+        </div>
+    </section>
+
+    <div class="field has-addons" style="margin: 20px;">
+        <p class="control">
+            <span class="select">
+                <select>
+                    <option>Thesis</option>
+                    <option>Project</option>
+                </select>
+            </span>
+        </p>
+        <p class="control is-expanded">
+            <input class="input" type="text" placeholder="Search keywords (separated by comma)">
+        </p>
+        <p class="control">
+            <a class="button">
+                Search
+            </a>
+        </p>
+    </div>
+
+    <div class="columns" style="margin-left: 20px; margin-right: 20px">
+        <!-- Submission Form -->
+        <div class="column is-narrow" style="border: 1px solid black;">
+            <form>
+                <h1 class="title">Search Filter</h1>
+                <!-- Filter checkboxes here -->
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">Update Filters</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light">Reset Filters</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="column" style="overflow-y: scroll;">
+            <h1 class="title">Admin Panel</h1>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Thesis Title</th>
+                            <th>Submission Type</th>
+                            <th>Full Name</th>
+                            <th>Group Name</th>
+                            <th>Professor Name</th>
+                            <th>Submission Date</th>
+                            <th>Keywords</th>
+                            <th>School</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submission-table-body">
+                        {% for submission in submissions %}
+                        <tr>
+                            <td>{{ submission[1] }}</td>
+                            <td>{{ submission[2] }}</td>
+                            <td>{{ submission[3] }}</td>
+                            <td>{{ submission[4] }}</td>
+                            <td>{{ submission[8] }}</td>
+                            <td>{{ submission[9] }}</td>
+                            <td>{{ submission[13] }}</td>
+                            <td>{{ submission[14] }}</td>
+                            <td>{{ submission[15] }}</td>
+                            <td>
+                                <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
+                                    data-submission-id="{{submission[0]}}">View
+                                    Details</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="static/js/admin.js"></script>
+{% endblock %}
