@@ -76,14 +76,14 @@
                         {% for submission in submissions %}
                         <tr>
                             <td>{{ submission[1] }}</td>
-                            <td>{{ submission[2] }}</td>
+                            <td>{{ submission[2] | replace("{", "") | replace("}", "") | replace("'", "") }} }}</td>
                             <td>{{ submission[3] }}</td>
                             <td>{{ submission[4] }}</td>
                             <td>{{ submission[8] }}</td>
                             <td>{{ submission[9] }}</td>
                             <td>{{ submission[13] }}</td>
                             <td>{{ submission[14] }}</td>
-                            <td>{{ submission[15] }}</td>
+                            <td>{{ submission[15] | replace("{", "") | replace("}", "") | replace("'", "") }} }}</td>
                             <td>
                                 <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
                                     data-submission-id="{{submission[0]}}">View
