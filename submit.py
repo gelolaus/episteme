@@ -2,6 +2,9 @@ import mysql.connector
 
 
 def submit_to_database(form_data, user_id):
+    # Get the file from the form_data
+    file = form_data['file']
+
     db = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -13,7 +16,7 @@ def submit_to_database(form_data, user_id):
     cursor = db.cursor()
 
     # Insert the data into the database
-    query = "INSERT INTO submissions (thesis_title, submission_type, full_name, group_name, member_name1, member_name2, member_name3, professor_name, submission_date, abstract, school"
+    query = "INSERT INTO submissions (thesis_title, submission_type, full_name, group_name, member_name1, member_name2, member_name3, professor_name, submission_date, abstract, school, soft_copy"
 
     # Optional fields
     if 'github_repository' in form_data:
@@ -25,7 +28,7 @@ def submit_to_database(form_data, user_id):
     # Add the user_id column to the query
     query += ", user_id)"
 
-    query += " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
+    query += " VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s"
 
     # Optional field placeholders
     if 'github_repository' in form_data:
@@ -48,7 +51,8 @@ def submit_to_database(form_data, user_id):
         form_data['professor_name'],
         form_data['submission_date'],
         form_data['abstract'],
-        form_data['school']
+        form_data['school'],
+        file.read(),  # Read the file content as bytes
     )
 
     # Optional field values
@@ -64,6 +68,7 @@ def submit_to_database(form_data, user_id):
     values += (user_id,)
 
     cursor.execute(query, values)
+
     db.commit()
 
     cursor.close()
