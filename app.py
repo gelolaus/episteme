@@ -1,14 +1,20 @@
-from flask import render_template, request
 import os
 import submit
+import mysql.connector
 
-from flask import Flask, render_template, request, redirect, session, jsonify
+from flask import Flask, render_template, request, redirect, session
 from werkzeug.utils import secure_filename
 from register import register_user
 from login import login_user
 from admin import fetch_submissions_admin
 from verify import fetch_submissions_verify
 from publish import fetch_submissions_publish
+from view import fetch_submissions_view
+from update import update_submission_mysql
+from verify_update import update_verify_mysql
+from home import fetch_submissions_homepage
+from homepage_view import fetch_submissions_homeview
+from verify_view import fetch_submissions_verifyview
 from personal import get_user_submissions, get_user_id
 
 UPLOAD_FOLDER = 'uploads'  # Folder to store uploaded files
@@ -26,7 +32,7 @@ def allowed_file(filename):
 
 # Define a list of routes that require authentication
 authenticated_routes = ['/homepage', '/submission',
-                        '/admin', '/update_status', '/verify', '/publish']
+                        '/admin', '/update_status', '/verify', '/publish', '/view', '/homeview', '/personal', '/hompage_view', '/verify_view', '/publish_view']
 
 
 @app.before_request
@@ -47,7 +53,7 @@ def check_authentication():
     # Check if the user is trying to access the /verify page
     if request.path == '/verify' and 'email_address' in session:
         allowed_email_addresses = [
-            'bigbrews@apc.edu.ph'  # Modify this with the actual allowed email addresses
+            'dev@bigbrews'  # Modify this with the actual allowed email addresses
         ]
         if session['email_address'] not in allowed_email_addresses:
             return redirect('/')
@@ -55,10 +61,24 @@ def check_authentication():
             # Check if the user is trying to access the /publish page
     if request.path == '/publish' and 'email_address' in session:
         allowed_email_addresses = [
-            'bigbrews@apc.edu.ph'  # Modify this with the actual allowed email addresses
+            'dev@bigbrews'  # Modify this with the actual allowed email addresses
         ]
         if session['email_address'] not in allowed_email_addresses:
             return redirect('/')
+
+
+def get_pdf_data(submission_id):
+    # Connect to MySQL database
+    connection = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="BigBrews-23",
+        auth_plugin="mysql_native_password",
+        database="episteme_db"
+    )
+
+    # Create a cursor object
+    cursor = connection.cursor()
 
 
 @app.route('/')
@@ -92,7 +112,7 @@ def register_route():
 
     # Perform domain validation
     allowed_domains = ["apc.edu.ph",
-                       "student.apc.edu.ph"]
+                       "student.apc.edu.ph", "bigbrews"]
     domain = email_address.split("@")[-1]
     if domain not in allowed_domains:
         registration_message = 'This form only accepts \"apc.edu.ph\" and \"student.apc.edu.ph\" email addresses.'
@@ -136,8 +156,9 @@ def logout():
     session.clear()
     return redirect('/landing')
 
-
 # HOMEPAGE and SUBMISSION pages
+
+
 @app.route('/homepage')
 def homepage():
     if 'email_address' not in session:
@@ -155,7 +176,7 @@ def homepage():
         return redirect('/landing')
 
     # Retrieve user-specific submissions based on the user ID
-    submissions = get_user_submissions(user_id)
+    submissions = fetch_submissions_homepage()
 
     return render_template('homepage.html', submissions=submissions)
 
@@ -227,6 +248,39 @@ def submit_form():
     return "Error submitting form. Please check your file."
 
 
+@app.route('/update', methods=['POST'])
+def update_submission():
+    # Get the form data from the request
+    form_data = request.form
+
+    # Get the submission ID from the form data
+    submission_id = form_data['submission_id']
+
+    # Get the user ID (you may have your own way of retrieving it)
+    email_address = session['email_address']
+    user_id = get_user_id(email_address)
+
+    # Call the update_submission_mysql function to update the submission in the database
+    update_submission_mysql(form_data, user_id, submission_id)
+
+    return redirect('/submission')
+
+
+@app.route('/update_verify', methods=['POST'])
+def update_verify():
+    # Get the form data from the request
+    form_data = request.form
+
+    # Get the submission ID from the form data
+    submission_id = form_data['submission_id']
+
+    # Call the update_submission_mysql function to update the submission in the database
+    update_verify_mysql(form_data, submission_id)
+
+    return redirect('/verify')
+
+
+'''
 @app.route('/view_submission', methods=['POST'])
 def view_submission():
     submission_id = request.form['submission_id']
@@ -234,6 +288,7 @@ def view_submission():
 
     # Pass the details to the view_submission.html template
     return render_template('view_submission.html', submission=submission_details)
+'''
 
 
 # ADMIN and VERIFIER pages
@@ -255,6 +310,27 @@ def publish():
 def admin():
     submissions = fetch_submissions_admin()
     return render_template('admin.html', submissions=submissions)
+
+
+@app.route('/view', methods=['GET'])
+def view_submission():
+    submission_id = request.args.get('submission_id')
+    submission = fetch_submissions_view(submission_id)
+    return render_template('view.html', submission=submission)
+
+
+@app.route('/homepage_view', methods=['GET'])
+def homepage_view():
+    submission_id = request.args.get('submission_id')
+    submission = fetch_submissions_homeview(submission_id)
+    return render_template('homepage_view.html', submission=submission)
+
+
+@app.route('/verify_view', methods=['GET'])
+def verify_view():
+    submission_id = request.args.get('submission_id')
+    submission = fetch_submissions_verifyview(submission_id)
+    return render_template('verify_view.html', submission=submission)
 
 
 if __name__ == '__main__':
