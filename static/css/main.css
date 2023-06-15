@@ -26,3 +26,11 @@ body {
     max-height: 600px;
     overflow-y: auto;
 }
+
+.view-box-ni-luis {
+    min-width: 1000px;
+    margin-top: 50px !important;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+}
