@@ -7,11 +7,15 @@ Currently, the Asia Pacific College Library manually sorts and encodes the infor
 
 ---
 
+## Conclusion of the Project
+Knowledge management is a process for existing information in an organization to be managed, structured, and accessed by members of the organization. Currently, the Asia Pacific College Library sorts and encodes the thesis paper in a manual process. While it is available to all library users, indexing and encoding all thesis papers manually are inefficient. Thus, the developers created a web application called Episteme that allow members of the institution to upload their thesis papers and get verified by the library administrators in a swift process. Episteme will allow the improvement of the sorting and encoding process of thesis papers, avoid data inaccuracy, and allow all users to access available thesis papers with convenience. With the aim of improving the current system of the Asia Pacific College’s library system, the project requires the developers to possess soft and technical skills such as communication, problem-solving, web development, and other skills necessary to the development process.  
+
 ## Project Team
 This project was created by the **Big Brews** consisting of three members with different roles in the team. 
 |Member Name|Role|
 |---|---|
 |Christian Luis Esguerra|Developer/Documentation|
 |Angelo John Benedict Laus|Development Lead|
-|Joaquin Paolo Pacete|Team Leader|
+|Joaquin Paolo Pacete|Team Leader/Lead Documentation|
 
+---
