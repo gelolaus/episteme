@@ -64,21 +64,21 @@
             </div>
 
             <div class="field" id="individualNameField">
-                <label class="label">Full Name</label>
+                <label class="label">Full Name (Last Name, First Name, M.I.)</label>
                 <div class="control">
                     <input class="input" type="text" placeholder="Full Name" name="full_name">
                 </div>
             </div>
 
             <div class="field" id="groupNameField" style="display: none;">
-                <label class="label">Group Name</label>
+                <label class="label">Group Name (or Group Number)</label>
                 <div class="control">
                     <input class="input" type="text" placeholder="Group Name" name="group_name">
                 </div>
             </div>
 
             <div class="field" id="memberFields" style="display: none;">
-                <label class="label">Members</label>
+                <label class="label">Members (Last Name, First Name, M.I.)</label>
                 <div class="control">
                     <input class="input" type="text" placeholder="Member #1" name="member_name1">
                 </div>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="field">
-                <label class="label">Professor Name</label>
+                <label class="label">Professor Name (Last Name, First Name, M.I.) </label>
                 <div class="control">
                     <input class="input" type="text" placeholder="Professor Name" name="professor_name">
                 </div>
@@ -139,7 +139,7 @@
             </div>
 
             <div class="field">
-                <label class="label">Keywords</label>
+                <label class="label">Keywords (disabled)</label>
                 <div class="control">
                     <input id="keywords-input" class="input" type="text" placeholder="Enter Keywords" disabled>
                 </div>
@@ -180,7 +180,7 @@
     </div>
 
     <div class="column">
-        <h1 class="title">Submission Status</h1>
+        <h1 class="title">Submission List</h1>
         <div class="table-container">
             <table class="table">
                 <thead>
@@ -211,7 +211,7 @@
                         <td>{{ submission['school'] }}</td>
                         <td>{{ submission['status'] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                         <td>
-                            <form action="/view_submission" method="POST">
+                            <form action="/view" method="GET">
                                 <input type="hidden" name="submission_id" value="{{ submission['submission_id'] }}">
                                 <button class="button is-primary" type="submit">View Details</button>
                             </form>
