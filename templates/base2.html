@@ -48,13 +48,13 @@
                 {%endif%}
 
 
-                {% if session['email_address'] == 'bigbrews@apc.edu.ph' %}
+                {% if session['email_address'] == 'dev@bigbrews' %}
                 <a class="navbar-item" href="{{ url_for('verify') }}">
                     Verify Panel
                 </a>
                 {%endif%}
 
-                {% if session['email_address'] == 'bigbrews@apc.edu.ph' %}
+                {% if session['email_address'] == 'dev@bigbrews' %}
                 <a class="navbar-item" href="{{ url_for('publish') }}">
                     Publish Panel
                 </a>
@@ -65,10 +65,9 @@
             <div class="navbar-end">
 
                 <a href="/logout">
-                    <figure class="image is-48x48 has-dropdown is-hoverable"
-                        style="padding: 5px; padding-right: 5px; margin-right: 20px;">
-                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                    </figure>
+                    <button class="button is-danger" style="margin-right: 20px; margin-top:5px;">
+                        Logout
+                    </button>
                 </a>
 
             </div>
