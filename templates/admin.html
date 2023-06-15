@@ -85,9 +85,10 @@
                             <td>{{ submission[14] }}</td>
                             <td>{{ submission[15] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                             <td>
-                                <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
-                                    data-submission-id="{{submission[0]}}">View
-                                    Details</button>
+                                <form action="/verify_view" method="GET">
+                                    <input type="hidden" name="submission_id" value="{{ submission[0] }}">
+                                    <button class="button is-primary" type="submit">View Details</button>
+                                </form>
                             </td>
                         </tr>
                         {% endfor %}
