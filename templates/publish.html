@@ -55,7 +55,7 @@
         </div>
 
         <div class="column" style="overflow-y: scroll;">
-            <h1 class="title">Admin Panel</h1>
+            <h1 class="title">Publish Panel</h1>
             <div class="table-container">
                 <table class="table">
                     <thead>
@@ -76,18 +76,19 @@
                         {% for submission in submissions %}
                         <tr>
                             <td>{{ submission[1] }}</td>
-                            <td>{{ submission[2] | replace("{", "") | replace("}", "") | replace("'", "") }} }}</td>
+                            <td>{{ submission[2] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                             <td>{{ submission[3] }}</td>
                             <td>{{ submission[4] }}</td>
                             <td>{{ submission[8] }}</td>
                             <td>{{ submission[9] }}</td>
                             <td>{{ submission[13] }}</td>
                             <td>{{ submission[14] }}</td>
-                            <td>{{ submission[15] | replace("{", "") | replace("}", "") | replace("'", "") }} }}</td>
+                            <td>{{ submission[15] | replace("{", "") | replace("}", "") | replace("'", "") }}</td>
                             <td>
-                                <button class="button is-primary js-modal-trigger" data-target="modal-js-example"
-                                    data-submission-id="{{submission[0]}}">View
-                                    Details</button>
+                                <form action="/verify_view" method="GET">
+                                    <input type="hidden" name="submission_id" value="{{ submission[0] }}">
+                                    <button class="button is-primary" type="submit">View Details</button>
+                                </form>
                             </td>
                         </tr>
                         {% endfor %}
