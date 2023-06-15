@@ -30,10 +30,8 @@
                                             <div class="content" style="font-size: 18px;">
                                                 <p><strong>Contribute to the academic community & showcase your research
                                                         here!</strong></p>
-                                                <p>Here, you have the opportunity to share your scholarly work with
-                                                    fellow students, researchers, and the esteemed faculty and
-                                                    professors at Asia Pacific College. Join in building a dynamic
-                                                    repository of knowledge and contributing to intellectual growth!</p>
+                                                <p>Join in building a dynamic
+                                                    repository of knowledge and contributing to intellectual growth.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -54,8 +52,7 @@
                                                 <p><strong>Gain access to an extensive collection of academic theses
                                                         here!</strong></p>
                                                 <p>Explore research and scholarly work conducted by students and faculty
-                                                    of Asia Pacific College. Expand your understanding with innovative
-                                                    ideas, significant discoveries, and insightful findings. Immerse
+                                                    of Asia Pacific College. Immerse
                                                     yourself in a repository of knowledge for exploration and reference.
                                                 </p>
                                             </div>
@@ -185,6 +182,41 @@
 
         <div class="column">
             <h1 class="title">Knowledge Library</h1>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Thesis Title</th>
+                            <th>Full Name</th>
+                            <th>Group Name</th>
+                            <th>Professor Name</th>
+                            <th>Submission Date</th>
+                            <th>Keywords</th>
+                            <th>School</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submission-table-body">
+                        {% for submission in submissions %}
+                        <tr>
+                            <td>{{ submission[1] }}</td>
+                            <td>{{ submission[3] }}</td>
+                            <td>{{ submission[4] }}</td>
+                            <td>{{ submission[8] }}</td>
+                            <td>{{ submission[9] }}</td>
+                            <td>{{ submission[13] }}</td>
+                            <td>{{ submission[14] }}</td>
+                            <td>
+                                <form action="/homepage_view" method="GET">
+                                    <input type="hidden" name="submission_id" value="{{ submission[0] }}">
+                                    <button class="button is-primary" type="submit">View Details</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 
